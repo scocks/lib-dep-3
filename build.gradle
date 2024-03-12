@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+apply plugin: 'maven-publish'
+
+group = 'org.libDep3'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+apply plugin : "java"
+ext {
+    javaMainClass = "org.libDep3.Main"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("build/libs/lib-dep-3-${version}.jar") {
+                extension 'jar'
+            }
+        }
+    }
+    repositories {
+        maven {
+          name 'nexus'
+            url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-snapshots/"
+            credentials {
+                username project.repoUser
+                password project.repoPassword
+            }
+        }
+    }
+}
+
+publishMavenPublicationToNexusRepository.dependsOn jar
