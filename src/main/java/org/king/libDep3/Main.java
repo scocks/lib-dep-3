@@ -1,4 +1,4 @@
-package org.king;
+package org.king.libDep3;
 public class Main {
     public static void main(String[] args) {
         Library library = new Library();
