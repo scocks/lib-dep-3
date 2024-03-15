@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.sonarqube' version '4.4.1.3373'
 }
 
 apply plugin: 'maven-publish'
@@ -31,6 +32,15 @@ test {
     useJUnitPlatform()
 }
 
+sonar {
+    properties {
+        property 'sonar.projectKey', 'lib-dep-3'
+        property 'sonar.organization', 'king'
+        property 'sonar.host.url', ' https://sonarqube.kingq12024.sa-demo.beescloud.com/'
+        property 'sonar.token', 'sqa_7e6d65b9f302f6d68761a5d70e4ab9e5786ff085'
+    }
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
@@ -41,7 +51,7 @@ publishing {
     }
     repositories {
         maven {
-          name 'nexus'
+            name 'nexus'
             url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-snapshots/"
             credentials {
                 username project.repoUser

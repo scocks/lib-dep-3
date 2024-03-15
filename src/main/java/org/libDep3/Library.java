@@ -8,6 +8,6 @@ public class Library {
         return lines;
     }
     public String greet(String name) {
-        return "Hello, " + name + "!";
+        return "Salutations, " + name + "!";
     }
 }
