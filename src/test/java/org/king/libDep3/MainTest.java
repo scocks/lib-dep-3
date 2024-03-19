@@ -1,6 +1,7 @@
-package org.king.libDep3;
+package org.king.libdep3;
 
 import org.junit.jupiter.api.Test;
+import org.king.libdep3.Library;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

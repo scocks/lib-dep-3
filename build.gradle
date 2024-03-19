@@ -1,10 +1,9 @@
 plugins {
     id 'java'
-    id 'application'
     id 'org.sonarqube' version '4.4.1.3373'
+    id 'jacoco'
+    id 'maven-publish'
 }
-
-apply plugin: 'maven-publish'
 
 group = 'org.king.libDep3'
 version = '1.0-SNAPSHOT'
@@ -19,11 +18,16 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-apply plugin : "java"
-
 test {
     useJUnitPlatform()
 }
+
+jacocoTestReport {    
+    reports {
+        xml.required = true    
+    }
+}
+test.finalizedBy jacocoTestReport
 
 sonar {
     properties {
@@ -31,6 +35,7 @@ sonar {
         property 'sonar.organization', 'king'
         property 'sonar.host.url', ' https://sonarqube.kingq12024.sa-demo.beescloud.com/'
         property 'sonar.token', 'sqa_7e6d65b9f302f6d68761a5d70e4ab9e5786ff085'
+        property 'sonar.gradle.skipCompile', 'true'
     }
 }
 
@@ -44,7 +49,7 @@ publishing {
     }
     repositories {
         maven {
-            name 'nexus'
+          name 'nexus'
             url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-snapshots/"
             credentials {
                 username project.repoUser
