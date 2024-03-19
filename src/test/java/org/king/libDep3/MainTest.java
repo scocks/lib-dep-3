@@ -9,6 +9,6 @@ class MainTest {
     void testGreet() {
         Library library = new Library();
         String result = library.greet("lib-dep-3");
-        assertEquals("greet from libdep3, lib-dep-3!", result);
+        assertEquals("greet from libdep3, lib-dep-3", result);
     }
 }
